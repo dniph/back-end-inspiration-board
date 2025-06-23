@@ -1,10 +1,9 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey
 from .base import Base
+from ..db import db
 
-class Card(Base):
-    __tablename__ = "card"
-
+class Card(db.Model):
     card_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     message: Mapped[str]
     likes_count: Mapped[int]

@@ -1,9 +1,8 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .base import Base
+from ..db import db
 
-class Board(Base):
-    __tablename__ = "board"
-
+class Board(db.Model):
     board_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     title: Mapped[str]
     owner: Mapped[str]
