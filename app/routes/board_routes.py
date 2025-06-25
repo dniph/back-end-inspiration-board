@@ -40,3 +40,12 @@ def add_card_to_board(board_id):
     card, status = create_model(Card, data)
     return card.to_dict(), status
 
+# Delete one board
+@bp.delete("/<board_id>")
+def delete_board(board_id):
+    board = validate_model(Board, board_id)
+
+    db.session.delete(board)
+    db.session.commit()
+
+    return Response(status=204, mimetype="application/json")
