@@ -36,7 +36,7 @@ def get_board_cards(board_id):
 def add_card_to_board(board_id):
     board = validate_model(Board, board_id)
     data = request.get_json()
-    data["board_id"] = board.board_id
+    data["board_id"] = board.id
     card, status = create_model(Card, data)
     return card.to_dict(), status
 
