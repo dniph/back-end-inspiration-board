@@ -45,6 +45,8 @@ def add_card_to_board(board_id):
 def delete_board(board_id):
     board = validate_model(Board, board_id)
 
+    Card.query.filter(Card.board_id == board.id).delete()
+
     db.session.delete(board)
     db.session.commit()
 
