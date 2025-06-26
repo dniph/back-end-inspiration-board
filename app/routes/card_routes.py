@@ -19,3 +19,10 @@ def like_card(card_id):
     card.likes_count += 1
     db.session.commit()
     return card.to_dict(), 200
+
+@bp.patch("/<card_id>/dislike")
+def dislike_card(card_id):
+    card = validate_model(Card, card_id)
+    card.dislike_count += 1
+    db.session.commit()
+    return card.to_dict(), 200

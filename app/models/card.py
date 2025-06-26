@@ -11,6 +11,7 @@ class Card(db.Model):
     card_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     message: Mapped[str]
     likes_count: Mapped[int] = mapped_column(default=0)
+    dislike_count: Mapped[int] = mapped_column(default=0)
     board_id: Mapped[int] = mapped_column(ForeignKey("board.board_id"))
     board: Mapped["Board"] = relationship(back_populates="cards")
 
@@ -19,6 +20,7 @@ class Card(db.Model):
             "id": self.card_id,
             "card_message": self.message,
             "likes": self.likes_count,
+            "dislikes": self.dislike_count,
             "board_id": self.board_id
         }
 
