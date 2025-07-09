@@ -93,7 +93,7 @@ def test_delete_board_not_found(client):
     assert db.session.scalars(db.select(Board)).all() == []
     assert response_body == {"message": "Board 1 not found"}
 
-def test_create_board_must_contain_title(client):
+def test_create_board_must_contain_owner(client):
     # Act
     response = client.post("/boards", json={
         "owner": "Test User"
@@ -108,7 +108,7 @@ def test_create_board_must_contain_title(client):
     }
     assert db.session.scalars(db.select(Board)).all() == []
 
-def test_create_board_must_contain_owner(client):
+def test_create_board_must_contain_title(client):
     # Act
     response = client.post("/boards", json={
         "title": "Test Title"
