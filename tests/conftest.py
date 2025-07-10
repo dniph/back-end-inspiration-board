@@ -1,15 +1,4 @@
 import pytest
-<<<<<<< HEAD
-from app import create_app, db
-
-@pytest.fixture
-def app():
-    app = create_app({
-        "TESTING": True,
-        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
-        "SQLALCHEMY_TRACK_MODIFICATIONS": False
-    })
-=======
 from app import create_app
 from app.db import db
 from flask.signals import request_finished
@@ -32,19 +21,10 @@ def app():
     @request_finished.connect_via(app)
     def expire_session(sender, response, **extra):
         db.session.remove()
->>>>>>> 011728445acc1bc633bf89f7e7ebe46b557aba40
 
     with app.app_context():
         db.create_all()
         yield app
-<<<<<<< HEAD
-        db.session.remove()
-        db.drop_all()
-
-@pytest.fixture
-def client(app):
-    return app.test_client()
-=======
 
     # close and remove the temporary database
     with app.app_context():
@@ -57,7 +37,7 @@ def client(app):
 
 @pytest.fixture
 def one_board(app):
-    new_board = Board(title="Board 1", 
+    new_board = Board(title="Board 1",
                     owner="Jeslyn")
     db.session.add(new_board)
     db.session.commit()
@@ -78,4 +58,3 @@ def one_card_belongs_to_one_board(app, one_board, one_card):
     board = db.session.scalar(board_query)
     board.cards.append(card)
     db.session.commit()
->>>>>>> 011728445acc1bc633bf89f7e7ebe46b557aba40
